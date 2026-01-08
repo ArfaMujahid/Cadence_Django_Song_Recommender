@@ -1,0 +1,12 @@
+# Django Web Framework
+django==6.0.1
+
+# Data Science Libraries
+pandas==2.3.3
+numpy==2.2.6
+scikit-learn==1.8.0
+
+# Additional dependencies for scikit-learn
+scipy==1.16.3
+joblib==1.5.3
+threadpoolctl==3.6.0

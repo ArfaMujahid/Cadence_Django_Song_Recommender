@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f8f9fa;
+        color: #333333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+      }
+
+      .main-container {
+        flex: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 60px 20px 40px;
+        width: 100%;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        color: #666666;
+        font-weight: 400;
+      }
+
+      .form-container {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 40px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px 16px;
+        background: #ffffff;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        color: #333333;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        font-family: 'Inter', sans-serif;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      input[type="text"]::placeholder {
+        color: #adb5bd;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px -5px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .recommendations-container {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 32px;
+        border: 1px solid #e9ecef;
+        min-height: 200px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .recommendations-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+        color: #333333;
+      }
+
+      #recommendationsList {
+        list-style: none;
+      }
+
+      #recommendationsList li {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+        color: #495057;
+      }
+
+      #recommendationsList li:hover {
+        background: #e9ecef;
+        border-color: #dee2e6;
+        transform: translateX(4px);
+      }
+
+      .loading-indicator {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #e9ecef;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .error-message {
+        color: #ff6b6b;
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 107, 107, 0.1);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 107, 107, 0.2);
+      }
+
+      footer {
+        background: #ffffff;
+        border-top: 1px solid #e9ecef;
+        padding: 24px;
+        text-align: center;
+        color: #6c757d;
+        font-size: 0.875rem;
+        margin-top: auto;
+      }
+
+      @media (max-width: 640px) {
+        .main-container {
+          padding: 40px 16px 30px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .form-container,
+        .recommendations-container {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <header class="header">
+        <h1>Cadence</h1>
+        <p class="subtitle">Discover music that matches your taste</p>
+      </header>
+
+      <div class="form-container">
+        <form id="recommendForm" method="POST" action="/recommend/">
+          <div class="form-group">
+            <label for="song_name">Song Name</label>
+            <input
+              type="text"
+              id="song_name"
+              name="song_name"
+              placeholder="Enter song name..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="artist_name">Artist Name</label>
+            <input
+              type="text"
+              id="artist_name"
+              name="artist_name"
+              placeholder="Enter artist name..."
+              required
+            />
+          </div>
+          <button type="button" onclick="recommend()" class="btn-primary">
+            Get Recommendations
+          </button>
+        </form>
+      </div>
+
+      <div class="recommendations-container">
+        <h2 class="recommendations-header">Recommendations</h2>
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+          <div class="spinner"></div>
+          <p>Finding similar songs...</p>
+        </div>
+        <ul id="recommendationsList"></ul>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Cadence. Crafted with precision.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function recommend() {
+        var songName = $("#song_name").val().trim();
+        var artistName = $("#artist_name").val().trim();
+
+        if (!songName || !artistName) {
+          $("#recommendationsList").html('<li class="error-message">Please enter both song name and artist name</li>');
+          return;
+        }
+
+        // Show loading indicator
+        $("#loadingIndicator").show();
+        $("#recommendationsList").empty();
+
+        $.ajax({
+          type: "POST",
+          url: "/recommend/",
+          data: { song_name: songName, artist_name: artistName },
+          success: function (response) {
+            // Hide loading indicator
+            $("#loadingIndicator").hide();
+
+            // Display recommendations
+            $("#recommendationsList").empty();
+
+            if (response.recommendations && response.recommendations.length > 0) {
+              $.each(response.recommendations, function (index, recommendation) {
+                $("#recommendationsList").append(
+                  "<li>" + recommendation.song_name + "</li>"
+                );
+              });
+            } else {
+              $("#recommendationsList").html('<li class="error-message">No recommendations found. Try a different song.</li>');
+            }
+          },
+          error: function() {
+            // Hide loading indicator on error
+            $("#loadingIndicator").hide();
+            $("#recommendationsList").html('<li class="error-message">An error occurred while fetching recommendations. Please try again.</li>');
+          }
+        });
+      }
+
+      // Allow form submission with Enter key
+      $('#recommendForm input').keypress(function(e) {
+        if (e.which == 13) {
+          e.preventDefault();
+          recommend();
+        }
+      });
+    </script>
+  </body>
+</html>
